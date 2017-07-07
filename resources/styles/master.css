@@ -104,7 +104,7 @@ body {
   background-color: #4BB17C;
 }
 
-.button-green-on {
+.button-green-off:active {
   background-color: #a6d9be;
 }
 
@@ -116,7 +116,7 @@ body {
   background-color: #F83A30;
 }
 
-.button-red-on{
+.button-red-off:active{
   background-color: #fcb9b5;
 }
 
@@ -128,7 +128,7 @@ body {
   background-color: #B47406;
 }
 
-.button-yellow-on {
+.button-yellow-off:active {
   background-color:  #fabc52;
 }
 
@@ -140,6 +140,6 @@ body {
   background-color: #236369;
 }
 
-.button-blue-on {
+.button-blue-off:active {
   background-color: #40b5bf;
 }
