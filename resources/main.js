@@ -6,11 +6,19 @@ function sayHello(string){
 // user behaviors
 
 // when I press the slider to the on position then I see
+var elOnOff = document.querySelector('.switch input[name=turn-on-off]');
+elOnOff.addEventListener('change', function(){
+  if (this.checked) {
+    playIntro();
+  }
+});
 // buttons light up around the circle
 // and audio chimes around the circle
 // and count display shows 0
 // and I can activate the buttons
-
+function playIntro() {
+  sayHello("yoooo");
+}
 
 
 
@@ -46,6 +54,7 @@ elYellow.addEventListener('mousedown', function() {
 
 
 // computer behaviors
+
 // when turn on
 // when strict
 // when start
