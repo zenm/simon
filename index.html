@@ -2,37 +2,71 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>simon says</title>
+    <title>simon game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./resources/styles/reset.css">
     <link rel="stylesheet" href="./resources/styles/master.css">
   </head>
   <body>
     <div class="container">
+      <div class="game-background">
       <div class="all-settings">
         <div class="title">
-          <span>SIMON</span>
+          <span id="simon-title">simon</span><span id="simon-r-sign">&reg;</span>
         </div>
-        <div class="count-display">
-          <span>--</span>
+        <div class="button-settings-display">
+          <div class="count-section">
+            <div class="count-display">
+              <span>--</span>
+            </div>
+            <div class="count-label label">
+              <span>count</span>
+            </div>
+          </div>
+          <div class="start-section">
+            <div class="start">
+              <button type="button" name="button"><span>start</span></button>
+            </div>
+            <div class="start-label label">
+              <span>start</span>
+            </div>
+          </div>
+          <div class="strict-section">
+            <div class="strict-light light">
+            </div>
+            <div class="strict-mode">
+              <button type="button" name="button"><span>strict</span></button>
+            </div>
+            <div class="strict-label label">
+              <span>strict</span>
+            </div>
+          </div>
         </div>
-        <div class="start">
-          <button type="button" name="button"><span>start</span></button>
-        </div>
-        <div class="strict-mode">
-          <button type="button" name="button"><span>strict</span></button>
+        <div class="turn-on-off">
+          <span>OFF</span>
+          <label class="switch">
+            <input type="checkbox">
+            <div class="slider round"></div>
+          </label>
+          <span>ON</span>
         </div>
       </div>
       <div class="all-play-area">
-        <div class="buttons">
-          <div id="green-button" class="button button-green">
+        <div class="all-buttons">
+          <div class="top-buttons buttons">
+            <div id="green-button" class="button button-green button-green-off">
+            </div>
+            <div id="red-button" class="button button-red button-red-off">
+            </div>
           </div>
-          <div id="red-button" class="button button-red">
-          </div>
-          <div id="yellow-button"class="button button-yellow">
-          </div>
-          <div id="blue-button" class="button button-blue">
+          <div class="bottom-buttons buttons">
+            <div id="yellow-button"class="button button-yellow button-yellow-off">
+            </div>
+            <div id="blue-button" class="button button-blue button-blue-off">
+            </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
     <script type="text/javascript" src="./resources/main.js"></script>

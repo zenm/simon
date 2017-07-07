@@ -1,0 +1,145 @@
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Oswald Bold'), local('Oswald-Bold'), url(https://fonts.gstatic.com/s/oswald/v13/bH7276GfdCjMjApa_dkG6VtXRa8TVwTICgirnJhmVJw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+@font-face {
+  font-family: 'Oswald';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Oswald Regular'), local('Oswald-Regular'), url(https://fonts.gstatic.com/s/oswald/v13/pEobIV_lL25TKBpqVI_a2w.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+@font-face {
+  font-family: 'Share Tech Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Share Tech Mono'), local('ShareTechMono-Regular'), url(https://fonts.gstatic.com/s/sharetechmono/v6/RQxK-3RA0Lnf3gnnnNrAsYdJ2JT0J65PSe7wdxAnx_I.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.game-background {
+  background-color: #2C1E15;
+}
+
+/*settings*/
+.all-settings {
+  background-color: #A18678;
+  display: inline-block;
+  width: 15rem;
+  height: 15rem;
+  border-radius: 50%;
+  margin: 3rem 0 0 0;
+}
+
+.title {
+  margin: 2rem 0 0 0;
+  text-align: center;
+}
+
+#simon-title {
+  font-size: 2.5rem;
+}
+
+#simon-title {
+  font-family: 'Oswald', sans-serif;
+}
+
+#simon-r-sign {
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.button-settings-display {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin: 2rem 0 0 0;
+}
+
+.count-display {
+  text-align: center;
+  background-color: ;
+  padding: .4rem .9rem;
+  margin: 0 1rem;
+}
+
+
+.turn-on-off {
+  display: flex;
+  margin: 1rem 0 0 0;
+  justify-content: center;
+}
+
+* {
+  border: 1px dotted red;
+}
+
+/*buttons*/
+.button {
+  display: inline-block;
+  height: 10rem;
+  width: 10rem;
+}
+.buttons {
+  display: flex;
+}
+
+.button-green {
+  border-radius: 100% 0 0 0;
+}
+
+.button-green-off {
+  background-color: #4BB17C;
+}
+
+.button-green-on {
+  background-color: #a6d9be;
+}
+
+.button-red {
+  border-radius: 0 100% 0 0;
+}
+
+.button-red-off {
+  background-color: #F83A30;
+}
+
+.button-red-on{
+  background-color: #fcb9b5;
+}
+
+.button-yellow {
+  border-radius: 0 0 0 100%;
+}
+
+.button-yellow-off {
+  background-color: #B47406;
+}
+
+.button-yellow-on {
+  background-color:  #fabc52;
+}
+
+.button-blue {
+  border-radius: 0 0 100% 0;
+}
+
+.button-blue-off {
+  background-color: #236369;
+}
+
+.button-blue-on {
+  background-color: #40b5bf;
+}
