@@ -159,6 +159,10 @@ input:checked + .slider:before {
   background-color: #a6d9be;
 }
 
+.button-green-on {
+  background-color: #a6d9be;
+}
+
 .button-red {
   border-radius: 0 100% 0 0;
 }
@@ -168,6 +172,10 @@ input:checked + .slider:before {
 }
 
 .button-red-off:active {
+  background-color: #fcb9b5;
+}
+
+.button-red-on {
   background-color: #fcb9b5;
 }
 
@@ -183,6 +191,10 @@ input:checked + .slider:before {
   background-color:  #fabc52;
 }
 
+.button-yellow-on {
+  background-color:  #fabc52;
+}
+
 .button-blue {
   border-radius: 0 0 100% 0;
 }
@@ -192,5 +204,9 @@ input:checked + .slider:before {
 }
 
 .button-blue-off:active {
+  background-color: #40b5bf;
+}
+
+.button-blue-on {
   background-color: #40b5bf;
 }
