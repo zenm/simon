@@ -95,6 +95,7 @@ function turnOffSimon(){
 
 }
 
+// used to get and set the round count
 var elRoundNumber = document.querySelector('.count-display').children[0];
 function getRoundCount() {
   return elRoundNumber.textContent;
@@ -102,6 +103,12 @@ function getRoundCount() {
 
 function setRoundCount(string) {
   return elRoundNumber.textContent = string;
+}
+
+function incrementRoundCount() {
+  var roundCount = parseFloat(getRoundCount());
+  roundCount++;
+  return setRoundCount(roundCount);
 }
 
 function playIntro() {
@@ -148,21 +155,21 @@ elYellow.addEventListener('mousedown', function() {
   capturePlayerMoves(this.id);
 });
 
-// when I press start, then I see the computer shows
 
-// add event listener to start
 elStart = document.querySelector('.start button');
 elStart.addEventListener('click', function() {
   if (elOnOff.checked) {
   resetComputerPattern();
   resetPlayerMoves();
-  // color pattern is chosen
+  setRoundCount("0");
   setComputerPattern(listOfButtons);
   // capture record of user buttons
   // round count turns to 1
-  playComputerSequence();
+  incrementRoundCount();
+  // when I get the sequence right, then the round count increases, and I play the computer sequence
+  playComputerSequence(computersPattern, getRoundCount());
   // 'light up the first of the buttons'
-  sayHello("start hello, bitch");
+  sayHello("start hello");
   } // otherwise do nothing
 });
 
@@ -192,9 +199,12 @@ function resetComputerPattern() {
   return computersPattern = [];
 }
 
-function playComputerSequence () {
+// used to play the computers moves on the board
+function playComputerSequence (movesArray, roundCount) {
+  var currentRound = parseFloat(roundCount);
+  var currentArray = movesArray.slice(0, currentRound);
   var time = 0;
-  for (var i = 0; i < computersPattern.length; i++) {
+  for (var i = 0; i < currentArray.length; i++) {
     doComputerTimeOut(i, time);
     time+= 1000;
   }
@@ -206,6 +216,9 @@ function doComputerTimeOut (i, time){
   }, time);
 }
 
+function showError () {
+  
+}
 
 // when strict
 // when start
