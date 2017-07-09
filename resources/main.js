@@ -14,6 +14,7 @@ var yellowAudio = new Audio(yellowSoundLoc);
 var listOfButtons = ['red', 'blue', 'yellow', 'green'];
 var recordOfUserMoves = [];
 var computersPattern = [];
+var roundNumber = 0;
 
 // methods used to play all sounds
 var playSound = {
@@ -86,13 +87,13 @@ function playButton(stringColor) {
   }, 0);
   window.setTimeout(function() {
     turnOffButton(stringColor);
-  }, 750);
+  }, 1000);
 }
 
 // used to show what the game will look like when button is off.
 function turnOffSimon(){
   setRoundCount("--");
-
+  // disable colored buttons
 }
 
 // used to get and set the round count
@@ -108,6 +109,7 @@ function setRoundCount(string) {
 function incrementRoundCount() {
   var roundCount = parseFloat(getRoundCount());
   roundCount++;
+  roundNumber = roundCount;
   return setRoundCount(roundCount);
 }
 
@@ -135,24 +137,28 @@ var elRed = document.querySelector('.button-red');
 elRed.addEventListener('mousedown', function() {
   playSound.red();
   capturePlayerMoves(this.id);
+  doesUsersMoveMatch(computersPattern, getRoundCount());
 });
 
 var elGreen = document.querySelector('.button-green');
 elGreen.addEventListener('mousedown', function() {
   playSound.green();
   capturePlayerMoves(this.id);
+  doesUsersMoveMatch(computersPattern, getRoundCount());
 });
 
 var elBlue = document.querySelector('.button-blue');
 elBlue.addEventListener('mousedown', function() {
   playSound.blue();
   capturePlayerMoves(this.id);
+  doesUsersMoveMatch(computersPattern, getRoundCount());
 });
 
 var elYellow = document.querySelector('.button-yellow');
 elYellow.addEventListener('mousedown', function() {
   playSound.yellow();
   capturePlayerMoves(this.id);
+  doesUsersMoveMatch(computersPattern, getRoundCount());
 });
 
 
@@ -203,10 +209,10 @@ function resetComputerPattern() {
 function playComputerSequence (movesArray, roundCount) {
   var currentRound = parseFloat(roundCount);
   var currentArray = movesArray.slice(0, currentRound);
-  var time = 0;
+  var time = 500;
   for (var i = 0; i < currentArray.length; i++) {
     doComputerTimeOut(i, time);
-    time+= 1000;
+    time+= 1250;
   }
 }
 
@@ -216,9 +222,35 @@ function doComputerTimeOut (i, time){
   }, time);
 }
 
-function showError () {
-  
-}
+function doesUsersMoveMatch(movesArray, roundCount) {
+  var currentRound = parseFloat(roundCount);
+  var computerCurrentArray = movesArray.slice(0, currentRound);
+  var comparisonIndex = showPlayerMoves().length - 1;
+  console.log(computerCurrentArray);
+  console.log(computerCurrentArray[comparisonIndex]);
+  console.log(recordOfUserMoves[comparisonIndex]);
+  if (computerCurrentArray[comparisonIndex] == recordOfUserMoves[comparisonIndex]) {
+    if (recordOfUserMoves.length == computerCurrentArray.length) {
+      incrementRoundCount();
+      resetPlayerMoves();
+      playComputerSequence(computersPattern, getRoundCount());
+    } else {
+      sayHello("keep going");
+    }
 
-// when strict
-// when start
+  } else {
+    // showError
+    // playback correct button for 1.5 seconds
+    // playback sequence
+    showError();
+    sayHello("not the right move");
+  }
+}
+// doesUsersMoveMatch(computersPattern, getRoundCount());
+
+
+
+
+function showError () {
+  setRoundCount("!!");
+}
