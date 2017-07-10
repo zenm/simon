@@ -167,7 +167,7 @@ elYellow.addEventListener('mousedown', function() {
 });
 
 
-elStart = document.querySelector('.start button');
+elStart = document.querySelector('.start.button');
 elStart.addEventListener('click', function() {
   if (elOnOff.checked) {
     startResetSequence();
@@ -247,7 +247,6 @@ function doesUsersMoveMatch(arrayMoves, roundCount) {
       resetPlayerMoves();
       playComputerSequence(computersPattern, getRoundCount(), 500);
     } else {
-
     }
 
   } else {
@@ -263,7 +262,6 @@ function doesUsersMoveMatch(arrayMoves, roundCount) {
 }
 // doesUsersMoveMatch(computersPattern, getRoundCount());
 
-
 function flashWarning (numberOnTime, numberOffTime) {
   var warning = "!!";
   window.setTimeout(function() {
@@ -273,21 +271,26 @@ function flashWarning (numberOnTime, numberOffTime) {
     setRoundCount("");
   }, numberOffTime);
 
+  setSecondChance(strictMode);
 }
 
-function setSecondChange (boolean) {
+function setSecondChance (boolean) {
   if (boolean) {
     window.setTimeout(function() {
-    }, (1750 * roundNumber);
-    )
+      startResetSequence();
+    }, (2000 * roundNumber));
   } else {
-
+    sayHello("non-strict");
+    // return round number,
+    window.setTimeout(function() {
+      setRoundCount(roundNumber);
+      resetPlayerMoves();
+    }, (2000 * roundNumber));
   }
 }
-
 //setSecondChange(strictMode);
 
-var elStrict = document.querySelector('.strict-mode button');
+var elStrict = document.querySelector('.strict-mode.button');
 elStrict.addEventListener('click', function() {
   strictMode = strictMode == true? false: true;
   toggleStrictLight(strictMode);
