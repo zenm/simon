@@ -82,6 +82,17 @@ body {
   justify-content: center;
 }
 
+.strict-light-off {
+  width: .5rem;
+  height: .5rem;
+  border-radius: 50%;
+  background-color: blue;
+}
+
+.strict-light-on {
+  background-color: red;
+}
+
 /* The switch - the box around the slider */
 .switch {
   position: relative;

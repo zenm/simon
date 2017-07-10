@@ -15,6 +15,7 @@ var listOfButtons = ['red', 'blue', 'yellow', 'green'];
 var recordOfUserMoves = [];
 var computersPattern = [];
 var roundNumber = 0;
+var strictMode = false;
 
 // methods used to play all sounds
 var playSound = {
@@ -79,21 +80,25 @@ function introButtonTiming(stringColor) {
     }, 250);
 }
 
-// turn on button 'light' for .75 seconds, and plays sound
-function playButton(stringColor) {
+// playButton(stringColor, 0, 1000);
+
+// turn on button 'light' for 1.0 second, and plays sound
+function playButton(stringColor, numberOnTime, numberOffTime) {
   window.setTimeout(function() {
     turnOnButton(stringColor);
     playSound[stringColor]();
-  }, 0);
+  }, numberOnTime);
   window.setTimeout(function() {
     turnOffButton(stringColor);
-  }, 1000);
+  }, numberOffTime);
 }
+
 
 // used to show what the game will look like when button is off.
 function turnOffSimon(){
   setRoundCount("--");
   // disable colored buttons
+  // disable strict mode button
 }
 
 // used to get and set the round count
@@ -165,6 +170,11 @@ elYellow.addEventListener('mousedown', function() {
 elStart = document.querySelector('.start button');
 elStart.addEventListener('click', function() {
   if (elOnOff.checked) {
+    startResetSequence();
+  } // otherwise do nothing
+});
+
+function startResetSequence(){
   resetComputerPattern();
   resetPlayerMoves();
   setRoundCount("0");
@@ -173,11 +183,10 @@ elStart.addEventListener('click', function() {
   // round count turns to 1
   incrementRoundCount();
   // when I get the sequence right, then the round count increases, and I play the computer sequence
-  playComputerSequence(computersPattern, getRoundCount());
+  playComputerSequence(computersPattern, getRoundCount(), 1000);
   // 'light up the first of the buttons'
-  sayHello("start hello");
-  } // otherwise do nothing
-});
+}
+
 
 // string - either yellow green blue or red
 function capturePlayerMoves(string) {
@@ -206,51 +215,93 @@ function resetComputerPattern() {
 }
 
 // used to play the computers moves on the board
-function playComputerSequence (movesArray, roundCount) {
+function playComputerSequence (arrayMoves, roundCount, numberTime) {
   var currentRound = parseFloat(roundCount);
-  var currentArray = movesArray.slice(0, currentRound);
-  var time = 500;
+  var currentArray = arrayMoves.slice(0, currentRound);
+  var time = numberTime;
   for (var i = 0; i < currentArray.length; i++) {
     doComputerTimeOut(i, time);
     time+= 1250;
   }
 }
+//  playComputerSequence(computersPattern, getRoundCount(), 500);
 
 function doComputerTimeOut (i, time){
   window.setTimeout(function() {
-    playButton(computersPattern[i]);
+    playButton(computersPattern[i], 0, 1000);
   }, time);
 }
 
-function doesUsersMoveMatch(movesArray, roundCount) {
+function doesUsersMoveMatch(arrayMoves, roundCount) {
   var currentRound = parseFloat(roundCount);
-  var computerCurrentArray = movesArray.slice(0, currentRound);
+  var computerCurrentArray = arrayMoves.slice(0, currentRound);
   var comparisonIndex = showPlayerMoves().length - 1;
-  console.log(computerCurrentArray);
-  console.log(computerCurrentArray[comparisonIndex]);
-  console.log(recordOfUserMoves[comparisonIndex]);
   if (computerCurrentArray[comparisonIndex] == recordOfUserMoves[comparisonIndex]) {
-    if (recordOfUserMoves.length == computerCurrentArray.length) {
+    if (recordOfUserMoves.length == 20) {
+      sayHello("you win");
+      //playComputerSequence
+      //reset game
+    }
+    else if (recordOfUserMoves.length == computerCurrentArray.length) {
       incrementRoundCount();
       resetPlayerMoves();
-      playComputerSequence(computersPattern, getRoundCount());
+      playComputerSequence(computersPattern, getRoundCount(), 500);
     } else {
-      sayHello("keep going");
+
     }
 
   } else {
     // showError
-    // playback correct button for 1.5 seconds
+    flashWarning (0, 2000);
+    // playback correct button for 2 seconds
+    playButton(computerCurrentArray[comparisonIndex], 100, 2000);
     // playback sequence
-    showError();
+    playComputerSequence(computersPattern, roundNumber, 2000);
+
     sayHello("not the right move");
   }
 }
 // doesUsersMoveMatch(computersPattern, getRoundCount());
 
 
+function flashWarning (numberOnTime, numberOffTime) {
+  var warning = "!!";
+  window.setTimeout(function() {
+    setRoundCount(warning);
+  }, numberOnTime);
+  window.setTimeout(function() {
+    setRoundCount("");
+  }, numberOffTime);
 
+}
 
-function showError () {
-  setRoundCount("!!");
+function setSecondChange (boolean) {
+  if (boolean) {
+    window.setTimeout(function() {
+    }, (1750 * roundNumber);
+    )
+  } else {
+
+  }
+}
+
+//setSecondChange(strictMode);
+
+var elStrict = document.querySelector('.strict-mode button');
+elStrict.addEventListener('click', function() {
+  strictMode = strictMode == true? false: true;
+  toggleStrictLight(strictMode);
+  return strictMode;
+});
+
+var elStrictLight = document.querySelector('.strict-light');
+
+function toggleStrictLight(strictMode) {
+  if (elOnOff.checked){
+    if (strictMode) {
+      elStrictLight.classList.add('strict-light-on');
+    } else {
+      elStrictLight.classList.remove('strict-light-on');
+    }
+  } // else do nothing
 }
