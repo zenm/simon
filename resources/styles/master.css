@@ -29,8 +29,6 @@ html {
 body {
   font-family: 'Share Tech Mono', monospace;
   background-color: #bababa;
-  background-color: #2C1E15;
-
 }
 
 .game-background {
@@ -41,6 +39,7 @@ body {
 .all-settings {
   background-color: #A18678;
   display: flex;
+  justify-content: center;
   position: fixed;
   top: 0;
   width: 100%;
@@ -49,12 +48,14 @@ body {
 }
 
 .title {
-  margin: 1rem 0 0 2rem;
+  margin: .5rem;
   text-align: center;
+  display: flex;
+  align-items: center;
 }
 
 #simon-title {
-  font-size: 3.5rem;
+  font-size: 1.5rem;
 }
 
 #simon-title {
@@ -84,7 +85,7 @@ body {
   color: #6e3c2b;
   padding: .5rem 1rem;
   margin: 0 .5rem;
-  width: 3rem;
+  width: 2rem;
   height: 1.5rem;
   font-size: 1rem;
 }
@@ -105,8 +106,6 @@ body {
   height: 1rem;
   border-radius: 50%;
   margin: .5rem 0 0 0;
-
-  /*border-color: blue; /*#FEC331*/*/
 }
 
 
@@ -193,11 +192,6 @@ input:checked + .slider:before {
   transform: translateX(1rem);
 }
 
-
-/** {
-  border: 1px dotted red;
-}*/
-
 /*all play area*/
 .all-play-area {
   display: inline-block;
@@ -205,26 +199,15 @@ input:checked + .slider:before {
   margin: 5rem 0 0 0;
 }
 
-.all-buttons {
-  margin: 0 auto;
-  width: 30rem;
-}
-
 /*buttons*/
 .all-buttons .button {
   display: inline-block;
-  height: 27rem;
+  height: 20rem;
   width: 50%;
-  /*border: 1rem solid #2C1E15;*/
-
 }
 
 .buttons {
   display: flex;
-}
-
-.button-green {
-  /*border-radius: 100% 0 0 0;*/
 }
 
 .button-green-off {
@@ -239,10 +222,6 @@ input:checked + .slider:before {
   background-color: #a6d9be;
 }
 
-.button-red {
-  /*border-radius: 0 100% 0 0;*/
-}
-
 .button-red-off {
   background-color: #F83A30;
 }
@@ -253,10 +232,6 @@ input:checked + .slider:before {
 
 .button-red-on {
   background-color: #fcb9b5;
-}
-
-.button-yellow {
-  /*border-radius: 0 0 0 100%;*/
 }
 
 .button-yellow-off {
@@ -271,10 +246,6 @@ input:checked + .slider:before {
   background-color:  #fabc52;
 }
 
-.button-blue {
-  /*border-radius: 0 0 100% 0;*/
-}
-
 .button-blue-off {
   background-color: #236369;
 }
@@ -287,8 +258,34 @@ input:checked + .slider:before {
   background-color: #40b5bf;
 }
 
+.credits {
+  width: 100%;
+  text-align: center;
+  padding: 1rem 0;
+  background-color: #006400;
+  color: #dcdcdc;
+}
+
+.credits a:visited{
+  color: #bababa;
+}
+
 /*Desktop styles*************************************/
 @media only screen and (min-width: 768px) {
+  .all-play-area {
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 0 0;
+  }
+
+  .game-background {
+    max-width: 30rem;
+    max-height: 30rem;
+    border-radius: 50%;
+    margin: 5rem auto 0 auto;
+    border: 1.25rem solid #2C1E15;
+    box-shadow: -1rem 1rem .5rem #888888;
+  }
 
   .all-settings {
     background-color: #A18678;
@@ -301,149 +298,83 @@ input:checked + .slider:before {
     margin-right: auto;
     left: 0;
     right: 0;
-    top:13rem;
+    top:12rem;
     z-index: 10;
+    border: 1.5rem solid #2C1E15;
   }
-
 
   .title {
     margin: 2rem 0 0 0;
-    text-align: center;
+    justify-content: center;
   }
 
   #simon-title {
     font-size: 2.5rem;
   }
 
-  #simon-title {
-    font-family: 'Oswald', sans-serif;
-  }
-
-  #simon-r-sign {
-    font-family: 'Share Tech Mono', monospace;
-  }
-
   .button-settings-display {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
     margin: 1rem 0 0 0;
   }
 
-  .count-section {
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-  }
-
   .count-display {
-    text-align: center;
-    background-color: #2C1E15;
-    color: #6e3c2b;
     padding: .5rem 1rem;
     margin: 0 1rem;
     width: 2.5rem;
     height: 1.5rem;
   }
 
-  .count-display-on {
-    color: #d92626;
-  }
-
-
   .strict-mode.button,
   .start.button {
-    background-color: #F79D0C;
-    display: inline-block;
     width: 1rem;
     height: 1rem;
-    border-radius: 50%;
     margin: .5rem 0 0 0;
-
-    /*border-color: blue; /*#FEC331*/
   }
 
-
-
   .start-section {
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    margin: 0 0 0 1rem;
+    margin: 0 0 0 .5rem;
   }
 
   .strict-section {
-    display: flex;
-    flex-flow: column nowrap;
-    align-items: center;
-    margin: 0 0 0 1rem;
-  }
-
-  .strict-light-off {
-    width: .5rem;
-    height: .5rem;
-    border-radius: 50%;
-    background-color: #2C1E15;
-  }
-
-  .strict-light-on {
-    background-color: #d92626;
+    margin: 0 0 0 .5rem;
   }
 
   .turn-on-off {
     display: flex;
     margin: .5rem 0 0 0;
-    justify-content: center;
-    align-items: center;
   }
 
-  /* The switch - the box around the slider */
-  .switch {
-    position: relative;
+  .all-buttons .button {
     display: inline-block;
-    width: 2.5rem;
-    height: 1.5rem;
+    height: 13rem;
+    width: 13rem;
+    border: 1rem solid #2C1E15;
   }
 
-  /* Hide default HTML checkbox */
-  .switch input {display:none;}
-
-  /* The slider */
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #353535;
-    -webkit-transition: .1s;
-    transition: .1s;
+  .button-red {
+    border-radius: 0 100% 0 0;
   }
 
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 1rem;
-    width: 1rem;
-    left: .25rem;
-    bottom: .25rem;
-    background-color: white;
-    -webkit-transition: .1s;
-    transition: .1s;
+  .button-blue {
+    border-radius: 0 0 100% 0;
   }
 
-  input:checked + .slider {
-    background-color: #981b1b;
+  .button-yellow {
+    border-radius: 0 0 0 100%;
   }
 
-  input:focus + .slider {
-    box-shadow: 0 0 .4rem #981b1b;
+  .button-green {
+    border-radius: 100% 0 0 0;
   }
 
-  input:checked + .slider:before {
-    -webkit-transform: translateX(1rem);
-    -ms-transform: translateX(1rem);
-    transform: translateX(1rem);
+  .credits {
+    margin: 11rem 0 0 0;
+    padding: 3rem 0;
+    background-color: #006400;
+    color: #dcdcdc;
+    font-size: 1.25rem
+  }
+
+  .credits a:visited{
+    color: #bababa;
   }
 }

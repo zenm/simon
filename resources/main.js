@@ -240,7 +240,7 @@ function playComputerSequence (arrayMoves, roundCount, numberTime) {
   var time = numberTime;
   for (var i = 0; i < currentArray.length; i++) {
     doComputerTimeOut(i, time);
-    time+= 1000;
+    time += 1000;
   }
 }
 //  playComputerSequence(computersPattern, getRoundCount(), 500);
@@ -259,11 +259,7 @@ function doesUsersMoveMatch(arrayMoves, roundCount) {
     var comparisonIndex = showPlayerMoves().length - 1;
     if (computerCurrentArray[comparisonIndex] == recordOfUserMoves[comparisonIndex]) {
       if (recordOfUserMoves.length == 20) {
-        sayHello("you win");
-        resetPlayerMoves();
-        startResetSequence();
-        //playComputerSequence
-        //reset game
+        flashWin (100, 2000);
       }
       else if (recordOfUserMoves.length == computerCurrentArray.length) {
         incrementRoundCount();
@@ -277,8 +273,6 @@ function doesUsersMoveMatch(arrayMoves, roundCount) {
       playButton(computerCurrentArray[comparisonIndex], 100, 1800);
       // playback sequence after 2.0 seconds
       playComputerSequence(computersPattern, roundNumber, 1801);
-
-      sayHello("not the right move");
     }
   }
 }
@@ -300,14 +294,14 @@ function setSecondChance (boolean) {
   if (boolean) {
     window.setTimeout(function() {
       startResetSequence();
-    }, (1800 * roundNumber));
+    }, (1800 + (1000 * roundNumber)));
   } else {
     sayHello("non-strict");
     // return round number,
     window.setTimeout(function() {
       setRoundCount(roundNumber);
       resetPlayerMoves();
-    }, (1800 * roundNumber));
+    }, (1800 + (1000 * roundNumber)));
   }
 }
 //setSecondChange(strictMode);
@@ -330,3 +324,19 @@ function toggleStrictLight(strictMode) {
     }
   } // else do nothing
 }
+
+// flash W on winning a streak of 20 moves
+function flashWin (numberOnTime, numberOffTime){
+  var winMessage = "W";
+  window.setTimeout(function() {
+    setRoundCount(winMessage);
+  }, numberOnTime);
+  window.setTimeout(function() {
+    setRoundCount("");
+  }, numberOffTime);
+  window.setTimeout(function() {
+    resetPlayerMoves();
+    startResetSequence();
+  }, (2001));
+}
+//
