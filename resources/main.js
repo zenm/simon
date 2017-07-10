@@ -16,6 +16,7 @@ var recordOfUserMoves = [];
 var computersPattern = [];
 var roundNumber = 0;
 var strictMode = false;
+var gameStart = false;
 
 // methods used to play all sounds
 var playSound = {
@@ -97,9 +98,15 @@ function playButton(stringColor, numberOnTime, numberOffTime) {
 // used to show what the game will look like when button is off.
 function turnOffSimon(){
   setRoundCount("--");
-  // disable colored buttons
+  removeCountDisplayStyle();
   // disable strict mode button
+  elStrictLight.classList.remove('strict-light-on');
+  gameStart = false;
+  // disable colored buttons
+  // remove
 }
+
+
 
 // used to get and set the round count
 var elRoundNumber = document.querySelector('.count-display').children[0];
@@ -118,7 +125,18 @@ function incrementRoundCount() {
   return setRoundCount(roundCount);
 }
 
+// used to add or remove style to count display
+var elCountDisplay = document.querySelector('.count-display');
+function addCountDisplayStyle(){
+  elCountDisplay.classList.add('count-display-on');
+}
+
+function removeCountDisplayStyle(){
+  elCountDisplay.classList.remove('count-display-on');
+}
+
 function playIntro() {
+  addCountDisplayStyle();
   var time = 0;
   for (var i = 0; i < listOfButtons.length; i++) {
     doIntroSetTimeOut(i, time);
@@ -171,6 +189,7 @@ elStart = document.querySelector('.start.button');
 elStart.addEventListener('click', function() {
   if (elOnOff.checked) {
     startResetSequence();
+    return gameStart = true;
   } // otherwise do nothing
 });
 
@@ -183,7 +202,7 @@ function startResetSequence(){
   // round count turns to 1
   incrementRoundCount();
   // when I get the sequence right, then the round count increases, and I play the computer sequence
-  playComputerSequence(computersPattern, getRoundCount(), 1000);
+  playComputerSequence(computersPattern, getRoundCount(), 500);
   // 'light up the first of the buttons'
 }
 
@@ -221,43 +240,46 @@ function playComputerSequence (arrayMoves, roundCount, numberTime) {
   var time = numberTime;
   for (var i = 0; i < currentArray.length; i++) {
     doComputerTimeOut(i, time);
-    time+= 1250;
+    time+= 1000;
   }
 }
 //  playComputerSequence(computersPattern, getRoundCount(), 500);
 
 function doComputerTimeOut (i, time){
   window.setTimeout(function() {
-    playButton(computersPattern[i], 0, 1000);
+    playButton(computersPattern[i], 0, 750);
   }, time);
 }
 
 function doesUsersMoveMatch(arrayMoves, roundCount) {
-  var currentRound = parseFloat(roundCount);
-  var computerCurrentArray = arrayMoves.slice(0, currentRound);
-  var comparisonIndex = showPlayerMoves().length - 1;
-  if (computerCurrentArray[comparisonIndex] == recordOfUserMoves[comparisonIndex]) {
-    if (recordOfUserMoves.length == 20) {
-      sayHello("you win");
-      //playComputerSequence
-      //reset game
-    }
-    else if (recordOfUserMoves.length == computerCurrentArray.length) {
-      incrementRoundCount();
-      resetPlayerMoves();
-      playComputerSequence(computersPattern, getRoundCount(), 500);
+  if (gameStart) {
+    console.log(arrayMoves);
+    var currentRound = parseFloat(roundCount);
+    var computerCurrentArray = arrayMoves.slice(0, currentRound);
+    var comparisonIndex = showPlayerMoves().length - 1;
+    if (computerCurrentArray[comparisonIndex] == recordOfUserMoves[comparisonIndex]) {
+      if (recordOfUserMoves.length == 20) {
+        sayHello("you win");
+        resetPlayerMoves();
+        startResetSequence();
+        //playComputerSequence
+        //reset game
+      }
+      else if (recordOfUserMoves.length == computerCurrentArray.length) {
+        incrementRoundCount();
+        resetPlayerMoves();
+        playComputerSequence(computersPattern, getRoundCount(), 500);
+      }
     } else {
+      // showError for 1.8 s
+      flashWarning (0, 1800);
+      // playback correct button for 1.9 seconds
+      playButton(computerCurrentArray[comparisonIndex], 100, 1800);
+      // playback sequence after 2.0 seconds
+      playComputerSequence(computersPattern, roundNumber, 1801);
+
+      sayHello("not the right move");
     }
-
-  } else {
-    // showError
-    flashWarning (0, 2000);
-    // playback correct button for 2 seconds
-    playButton(computerCurrentArray[comparisonIndex], 100, 2000);
-    // playback sequence
-    playComputerSequence(computersPattern, roundNumber, 2000);
-
-    sayHello("not the right move");
   }
 }
 // doesUsersMoveMatch(computersPattern, getRoundCount());
@@ -278,14 +300,14 @@ function setSecondChance (boolean) {
   if (boolean) {
     window.setTimeout(function() {
       startResetSequence();
-    }, (2000 * roundNumber));
+    }, (1800 * roundNumber));
   } else {
     sayHello("non-strict");
     // return round number,
     window.setTimeout(function() {
       setRoundCount(roundNumber);
       resetPlayerMoves();
-    }, (2000 * roundNumber));
+    }, (1800 * roundNumber));
   }
 }
 //setSecondChange(strictMode);
