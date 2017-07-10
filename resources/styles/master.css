@@ -367,7 +367,7 @@ input:checked + .slider:before {
   }
 
   .credits {
-    margin: 11rem 0 0 0;
+    margin: 20rem 0 0 0;
     padding: 3rem 0;
     background-color: #006400;
     color: #dcdcdc;

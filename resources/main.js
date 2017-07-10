@@ -1,7 +1,3 @@
-function sayHello(string){
-  console.log("Why, hello there, " + string);
-}
-
 // locations of sounds
 var redSoundLoc ="./resources/audio/simonSound2.mp3";
 var greenSoundLoc ="./resources/audio/simonSound4.mp3";
@@ -81,8 +77,6 @@ function introButtonTiming(stringColor) {
     }, 250);
 }
 
-// playButton(stringColor, 0, 1000);
-
 // turn on button 'light' for 1.0 second, and plays sound
 function playButton(stringColor, numberOnTime, numberOffTime) {
   window.setTimeout(function() {
@@ -94,7 +88,6 @@ function playButton(stringColor, numberOnTime, numberOffTime) {
   }, numberOffTime);
 }
 
-
 // used to show what the game will look like when button is off.
 function turnOffSimon(){
   setRoundCount("--");
@@ -102,11 +95,7 @@ function turnOffSimon(){
   // disable strict mode button
   elStrictLight.classList.remove('strict-light-on');
   gameStart = false;
-  // disable colored buttons
-  // remove
 }
-
-
 
 // used to get and set the round count
 var elRoundNumber = document.querySelector('.count-display').children[0];
@@ -127,11 +116,11 @@ function incrementRoundCount() {
 
 // used to add or remove style to count display
 var elCountDisplay = document.querySelector('.count-display');
-function addCountDisplayStyle(){
+function addCountDisplayStyle() {
   elCountDisplay.classList.add('count-display-on');
 }
 
-function removeCountDisplayStyle(){
+function removeCountDisplayStyle() {
   elCountDisplay.classList.remove('count-display-on');
 }
 
@@ -193,7 +182,7 @@ elStart.addEventListener('click', function() {
   } // otherwise do nothing
 });
 
-function startResetSequence(){
+function startResetSequence() {
   resetComputerPattern();
   resetPlayerMoves();
   setRoundCount("0");
@@ -205,7 +194,6 @@ function startResetSequence(){
   playComputerSequence(computersPattern, getRoundCount(), 500);
   // 'light up the first of the buttons'
 }
-
 
 // string - either yellow green blue or red
 function capturePlayerMoves(string) {
@@ -243,7 +231,6 @@ function playComputerSequence (arrayMoves, roundCount, numberTime) {
     time += 1000;
   }
 }
-//  playComputerSequence(computersPattern, getRoundCount(), 500);
 
 function doComputerTimeOut (i, time){
   window.setTimeout(function() {
@@ -253,7 +240,6 @@ function doComputerTimeOut (i, time){
 
 function doesUsersMoveMatch(arrayMoves, roundCount) {
   if (gameStart) {
-    console.log(arrayMoves);
     var currentRound = parseFloat(roundCount);
     var computerCurrentArray = arrayMoves.slice(0, currentRound);
     var comparisonIndex = showPlayerMoves().length - 1;
@@ -276,7 +262,6 @@ function doesUsersMoveMatch(arrayMoves, roundCount) {
     }
   }
 }
-// doesUsersMoveMatch(computersPattern, getRoundCount());
 
 function flashWarning (numberOnTime, numberOffTime) {
   var warning = "!!";
@@ -294,17 +279,15 @@ function setSecondChance (boolean) {
   if (boolean) {
     window.setTimeout(function() {
       startResetSequence();
-    }, (1800 + (1000 * roundNumber)));
+    }, (1801 + (1000 * roundNumber)));
   } else {
-    sayHello("non-strict");
     // return round number,
     window.setTimeout(function() {
       setRoundCount(roundNumber);
       resetPlayerMoves();
-    }, (1800 + (1000 * roundNumber)));
+    }, (1801 + (1000 * roundNumber)));
   }
 }
-//setSecondChange(strictMode);
 
 var elStrict = document.querySelector('.strict-mode.button');
 elStrict.addEventListener('click', function() {
@@ -339,4 +322,3 @@ function flashWin (numberOnTime, numberOffTime){
     startResetSequence();
   }, (2001));
 }
-//
